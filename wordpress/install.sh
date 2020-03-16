@@ -4,11 +4,11 @@ if [[ $EUID -ne 0 ]]; then
 	exit 1
 fi
 
-read -p "Password for MySQL root: " root_passw
+read -sp "Password for MySQL root: " root_passw
 
 echo "Please enter NEW wordpress user credentials"
 read -p "Wordpress admin username: " wp_user
-read -p "Wordpress admin password: " wp_passw
+read -sp "Wordpress admin password: " wp_passw
 
 if [[ -z $wp_user || -z $wp_passw ]]; then
 	echo "Credentials not set, please try again"
@@ -31,7 +31,7 @@ echo "Cleaning up..."
 rm /tmp/latest.tar.gz
 
 systemctl restart apache2
-echo "Wordpress user set - $wp_user:$wp_passw"
+echo "Wordpress user set - $wp_user"
 echo "Wordpress database created: wordpress"
 echo "DONE! - Navigate to http://localhost/wordpress to finish set-up"
 echo "Use parameters above to complete set-up"

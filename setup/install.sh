@@ -21,7 +21,7 @@ ufw allow 80
 ufw allow 443
 apt install -y mysql-server
 echo "Please enter password for MySQL root user"
-read -p 'MySQL password: ' mysql_passw
+read -sp 'MySQL password: ' mysql_passw
 
 if [[ -z "$mysql_passw" ]]; then
 	echo "Credentials not set, please try again"
@@ -41,5 +41,5 @@ EOF
 systemctl restart apache2
 rm /var/www/html/index.html
 cp index.php /var/www/html/index.php
-echo "DONE! - MySQL username: root, password: $mysql_passw"
+echo "DONE! - MySQL username: root"
 
