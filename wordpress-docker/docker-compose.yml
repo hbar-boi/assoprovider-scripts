@@ -1,0 +1,36 @@
+---
+version: '3.2'
+services:
+  database:
+    image: mariadb:10.4
+    networks:
+      - database
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_PASS}
+      MYSQL_DATABASE: wordpress
+      MYSQL_USER: wordpress
+      MYSQL_PASSWORD: ${DB_PASS}
+    volumes:
+      - /var/lib/wordpress/database:/var/lib/mysql
+    restart: always
+
+  wordpress:
+    image: wordpress:5.3.2-apache
+    networks:
+      - database
+      - frontend
+    depends_on:
+      - database
+    environment:
+      WORDPRESS_DB_HOST: database
+      WORDPRESS_DB_USER: wordpress
+      WORDPRESS_DB_PASSWORD: ${DB_PASS}
+      WORDPRESS_DB_NAME: wordpress
+    restart: always
+
+networks:
+  # WordPress + Database
+  database: {}
+  # WordPress
+  frontend:
+    attachable: true
