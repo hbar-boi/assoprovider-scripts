@@ -1,0 +1,45 @@
+---
+version: '3.2'
+services:
+  database:
+    image: mariadb:10.4
+    networks:
+      - database
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_PASS}
+      MYSQL_DATABASE: moodle
+      MYSQL_USER: moodle
+      MYSQL_PASSWORD: ${DB_PASS}
+    volumes:
+      - /var/lib/moodle/database:/var/lib/mysql
+    restart: always
+
+  moodle:
+    image: bitnami/moodle:3.8.2
+    networks:
+      - database
+      - frontend
+    depends_on:
+      - database
+    environment:
+      - MOODLE_USERNAME
+      - MOODLE_PASSWORD
+      - MOODLE_EMAIL
+      - MARIADB_HOST=database
+      - MOODLE_DATABASE_NAME=moodle
+      - MOODLE_DATABASE_USER=moodle
+      - MOODLE_DATABASE_PASSWORD=${DB_PASS}
+      - SMTP_HOST
+      - SMTP_PORT
+      - SMTP_USER
+      - SMTP_PASSWORD
+      - SMTP_PROTOCOL
+    volumes:
+      - /var/lib/moodle/data:/bitnami
+    restart: always
+networks:
+  # Moodle + Database
+  database: {}
+  # Moodle
+  frontend:
+    attachable: true
