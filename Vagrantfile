@@ -26,7 +26,7 @@ Vagrant.configure("2") do |config|
 
   # Generic configuration
   config.vm.box = BOX
-  config.vm.synced_folder ".", "/vagrant", disabled: true
+  config.vm.synced_folder ".", "/vagrant"
 
   # Assign libvirt
   config.vm.provider :libvirt do |libvirt|
