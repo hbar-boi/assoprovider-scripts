@@ -4,6 +4,7 @@ Prima di procedere all'installazione dei pacchetti desiderati occorre eseguire l
 script in "setup".
 
 $ cd setup
+
 $ sudo ./install.sh
 
 Lo script chiederà username e password con cui configurare l'utente root di MySQL.
@@ -14,6 +15,7 @@ Verrà installato Git ed uno stack LAMP.
 Per l'installazione del pacchetto wordpress lanciare lo script in "wordpress"
 
 $ cd wordpress
+
 $ sudo ./install.sh
 
 Lo script chiederà username e password per la creazione di un nuovo utente che
