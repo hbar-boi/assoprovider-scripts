@@ -16,7 +16,7 @@ fi
 [ -x "$(command -v docker)" ] || apt-get install -y docker.io
 [ -x "$(command -v docker-compose)" ] || apt-get install -y docker-compose
 
-systemctl is-enabled docker.service || systemctl enable --now docker.service
+systemctl is-enabled docker.service > /dev/null || systemctl enable --now docker.service
 
 #
 # Install Docker cleanup service
