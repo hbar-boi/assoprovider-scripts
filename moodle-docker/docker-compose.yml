@@ -21,6 +21,8 @@ services:
       - frontend
     depends_on:
       - database
+    expose:
+      - "80"
     environment:
       - MOODLE_USERNAME
       - MOODLE_PASSWORD

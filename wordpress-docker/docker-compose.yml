@@ -21,6 +21,8 @@ services:
       - frontend
     depends_on:
       - database
+    expose:
+      - "80"
     environment:
       WORDPRESS_DB_HOST: database
       WORDPRESS_DB_USER: wordpress
