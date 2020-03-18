@@ -24,6 +24,7 @@ services:
     expose:
       - "80"
     environment:
+      VIRTUAL_HOST: $VIRTUAL_HOST
       WORDPRESS_DB_HOST: database
       WORDPRESS_DB_USER: wordpress
       WORDPRESS_DB_PASSWORD: $DB_PASS

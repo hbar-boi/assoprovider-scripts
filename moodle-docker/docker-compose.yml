@@ -24,6 +24,7 @@ services:
     expose:
       - "80"
     environment:
+      - VIRTUAL_HOST
       - MOODLE_USERNAME
       - MOODLE_PASSWORD
       - MOODLE_EMAIL

@@ -33,6 +33,13 @@ if [ -z "$DB_PASS" ]; then
   echo "DB_PASS=$DB_PASS" >> .env
 fi
 
+if [ -z "$VIRTUAL_HOST" ]; then
+  while [ -z "$VIRTUAL_HOST" ]; do
+    printf 'Dominio? ' && read -r VIRTUAL_HOST
+  done
+  echo "VIRTUAL_HOST=$VIRTUAL_HOST" >> .env
+fi
+
 if [ -z "$MOODLE_USERNAME" ]; then
   while [ -z "$MOODLE_USERNAME" ]; do
     printf 'Username di Moodle? ' && read -r MOODLE_USERNAME
@@ -55,7 +62,7 @@ if [ -z "$MOODLE_EMAIL" ]; then
 fi
 
 
-if [ -z "$SMTP_HOST" ]; then
+if [ -z "$SMTP_HOST" ] && [ -z "$NO_EMAIL" ]; then
   printf "Desideri configurare l'invio delle email (s/N)? " && read -r MAIL_QUESTION
   if [ "$MAIL_QUESTION" = "S" ]; then
 
@@ -94,6 +101,8 @@ if [ -z "$SMTP_HOST" ]; then
       echo "SMTP_PROTOCOL=$SMTP_PROTOCOL" >> .env
     fi
 
+  else
+    echo "NO_EMAIL=y" >> .env
   fi
 fi
 

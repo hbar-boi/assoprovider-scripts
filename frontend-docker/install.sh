@@ -18,37 +18,17 @@ if ! [ -x "$(command -v docker)" ]; then
 fi
 
 #
-# Ask for credentials
+# Lancia il servizio
 #
-
-# Import existing settings
-if [ -f .env ]; then
-  . ./.env
-fi
-
-if [ -z "$DB_PASS" ]; then
-  while [ -z "$DB_PASS" ]; do
-    printf 'Database password? ' && read -r DB_PASS
-  done
-  echo "DB_PASS=$DB_PASS" >> .env
-fi
-
-if [ -z "$VIRTUAL_HOST" ]; then
-  while [ -z "$VIRTUAL_HOST" ]; do
-    printf 'Dominio? ' && read -r VIRTUAL_HOST
-  done
-  echo "VIRTUAL_HOST=$VIRTUAL_HOST" >> .env
-fi
-
-#
-# Setup service
-#
-cat > /etc/systemd/system/wordpress.service <<EOF
+cat > /etc/systemd/system/frontend.service <<EOF
 [Unit]
-Description = Wordpress in Docker
+Description = Services frontend
 
 Requires = docker.service
 After = docker.service
+
+After = moodle.service
+After = wordpress.service
 
 [Service]
 ExecStartPre = $(command -v docker-compose) pull --ignore-pull-failures
@@ -62,4 +42,4 @@ WorkingDirectory = $(pwd)
 WantedBy = multi-user.target
 EOF
 systemctl daemon-reload
-systemctl enable --now wordpress.service
+systemctl enable --now frontend.service

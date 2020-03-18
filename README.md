@@ -4,9 +4,21 @@
 
 ### Procedura guidata di installazione
 
-Dalla root di questo repository eseguire `install.sh`, lo script chiederรก le informazioni necessarie
+Dalla root di questo repository eseguire `install.sh`, lo script chiederá le informazioni necessarie
 
 ### Installazione singoli componenti
+
+#### Frontend
+
+##### ATTENZIONE
+
+- __IL FRONTEND ? NECESSARIO PER ACCEDERE AI SERVIZI__
+- __AVVIARE GLI ALTRI SERVIZI PRIMA DEL FRONTEND__
+
+##### ISTRUZIONI
+
+- Installare Docker con `sudo sh docker/install.sh`
+- Installare il frontend con `cd frontend-docker && sudo sh install.sh`
 
 #### Moodle
 
@@ -22,6 +34,7 @@ Dalla root di questo repository eseguire `install.sh`, lo script chiederรก l
 
 ### Accesso ai log
 
+- __Frontend__: `sudo journalctl -u frontend.service`
 - __Moodle__: `sudo journalctl -u moodle.service`
 - __WordPress__: `sudo journalctl -u wordpress.service`
 
