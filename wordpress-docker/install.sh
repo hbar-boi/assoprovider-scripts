@@ -44,7 +44,10 @@ Requires = docker.service
 After = docker.service
 
 [Service]
-ExecStart = $(command -v docker-compose) up
+ExecStartPre = $(command -v docker-compose) pull --ignore-pull-failures
+ExecStart = $(command -v docker-compose) up --remove-orphans
+
+TimeoutStartSec = 0s
 
 WorkingDirectory = $(pwd)
 
