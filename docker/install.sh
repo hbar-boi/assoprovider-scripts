@@ -13,10 +13,10 @@ fi
 # Install Docker
 #
 
-apt-get install -y \
-  docker.io \
-  docker-compose
-systemctl enable --now docker.service
+[ -x "$(command -v docker)" ] || apt-get install -y docker.io
+[ -x "$(command -v docker-compose)" ] || apt-get install -y docker-compose
+
+systemctl is-enabled docker.service || systemctl enable --now docker.service
 
 #
 # Install Docker cleanup service
@@ -46,4 +46,4 @@ ExecStart = $(command -v docker) system prune --all --force
 EOF
 
 systemctl daemon-reload
-systemctl enable --now docker-cleanup.timer
+systemctl is-enabled docker-cleanup.timer || systemctl enable --now docker-cleanup.timer
