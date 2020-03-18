@@ -40,6 +40,8 @@ askInstall() {
   fi
 }
 
+apt update
+
 # Rende tutti gli script eseguibili
 find . -type f -name '*.sh' -print0 | xargs -r -0 chmod +x
 
