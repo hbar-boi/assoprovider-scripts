@@ -37,6 +37,8 @@ Vagrant.configure("2") do |config|
 
   # Forwarded ports
   config.vm.network "forwarded_port", guest: 8080, host: 8080
+  config.vm.network "forwarded_port", guest: 8000, host: 8000
+  config.vm.network "forwarded_port", guest: 10000, host: 10000
 
   # Replace Ubuntu repos
   config.vm.provision "shell",
