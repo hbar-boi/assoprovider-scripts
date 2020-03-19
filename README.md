@@ -33,3 +33,9 @@ $ sudo ./install
 
 Verrà creato un database MySQL "moodle" insieme ad un utente coi permessi su quest'ultimo.
 Al termine dello script navigare su http://localhost/moodle per completare la configurazione
+
+## Installazione Cryptpad
+
+Lanciare lo script di installazione in "cryptpad", il pacchetto verrà
+installato in $HOME/.cryptpad. Un servizio per lanciare il server node verrà creato
+(cryptpad.service) e il servizio aperto alle porte 3000 (unsafe) e 3001 (safe)
