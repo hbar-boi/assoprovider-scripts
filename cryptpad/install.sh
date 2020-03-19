@@ -4,7 +4,7 @@ set -e # Fallisci in caso di errore
 sudo -v
 
 sudo apt update
-sudo apt -y install git nodejs ufw
+sudo apt -y install git nodejs npm
 sudo npm install -g bower
 
 git clone https://github.com/xwiki-labs/cryptpad.git $HOME/.cryptpad
@@ -16,8 +16,8 @@ cd $HOME/.cryptpad
 npm install
 bower install
 
-sudo ufw allow 3000
-sudo ufw allow 3001
+#sudo ufw allow 3000
+#sudo ufw allow 3001
 
 sudo bash -c "cat > /etc/systemd/system/cryptpad.service" <<EOF
 [Unit]

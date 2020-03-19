@@ -13,9 +13,9 @@ if [[ UNATTENDED -ne 1 ]]; then
 	read -p "Install Dir for JITSI: " inst_dir
 fi
 
-mkdir inst_dir
+mkdir $inst_dir
 
-cd instdir
+cd $inst_dir
 
 git clone https://github.com/jitsi/docker-jitsi-meet && cd docker-jitsi-meet
 
@@ -38,7 +38,7 @@ After=docker.service
 Type = oneshot
 
 # Sostituire con il path ASSOLUTO a dove abbiamo eseguito il git clone
-WorkingDirectory=/home/mioutente/docker-jitsi-meet
+WorkingDirectory=$inst_dir/docker-jitsi-meet
 
 ExecStart = /usr/bin/docker-compose up -d
 
