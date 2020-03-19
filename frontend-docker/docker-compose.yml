@@ -12,6 +12,7 @@ services:
     networks:
       - moodledocker_frontend
       - wordpressdocker_frontend
+      - cryptpaddocker_frontend
     restart: always
 
 
@@ -31,6 +32,7 @@ services:
     networks:
       - moodledocker_frontend
       - wordpressdocker_frontend
+      - cryptpaddocker_frontend
     restart: always
 
 volumes:
@@ -40,4 +42,6 @@ networks:
   moodledocker_frontend:
     external: true
   wordpressdocker_frontend:
+    external: true
+  cryptpaddocker_frontend:
     external: true

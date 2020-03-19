@@ -48,6 +48,7 @@ find . -type f -name '*.sh' -print0 | xargs -r -0 chmod +x
 # Chiede di installare
 askInstall 'moodle-docker' "Moodle"
 askInstall 'wordpress-docker' "Wordpress"
+askInstall 'cryptpad-docker' "Cryptpad"
 
 # Installa il frontend
 printMSG "Installazione frontend"

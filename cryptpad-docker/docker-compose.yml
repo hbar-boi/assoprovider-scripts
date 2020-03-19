@@ -1,0 +1,40 @@
+---
+version: '3.2'
+services:
+
+  cryptpad:
+    build:
+      context: .
+      args:
+        - VERSION=latest
+    image: "cryptpad/cryptpad:latest"
+    hostname: cryptpad
+
+    environment:
+      - VIRTUAL_HOST=cryptpad.127.0.0.1.nip.io
+      - USE_SSL=false
+      - STORAGE='./storage/file'
+      - LOG_TO_STDOUT=true
+
+    ports:
+      - "3000:3000"
+      - "3001:3001"
+
+    networks:
+      - frontend
+
+    expose:
+      - "3000"
+
+    restart: always
+    volumes:
+      - ./data/files:/cryptpad/datastore:rw
+      - ./data/customize:/cryptpad/customize:rw
+      - ./data/blob:/cryptpad/blob:rw
+      - ./data/block:/cryptpad/block:rw
+      - ./data/config:/cryptpad/cfg:rw
+      - ./data/data:/cryptpad/data:rw
+
+networks:
+  frontend:
+    attachable: true
