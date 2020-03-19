@@ -1,5 +1,7 @@
 #!/bin/bash
 
+UNATTENDED=1
+
 if [[ $EUID -ne 0 ]]; then
 	echo "Please run as root"
 	exit 1
@@ -14,14 +16,19 @@ apt -y upgrade
 echo "Installing git and LAMP stack"
 sleep 3
 apt -y install git apache2
-ufw enable
-ufw allow 22
-ufw allow 3306
-ufw allow 80
-ufw allow 443
+#ufw enable
+#ufw allow 22
+#ufw allow 3306
+#ufw allow 80
+#ufw allow 443
 apt install -y mysql-server
 echo "Please enter password for MySQL root user"
-read -sp 'MySQL password: ' mysql_passw
+
+mysql_passw="ciccione"
+if [[ UNATTENDED -ne 1 ]]; then
+	read -sp 'MySQL password: ' mysql_passw
+fi
+
 
 if [[ -z "$mysql_passw" ]]; then
 	echo "Credentials not set, please try again"
@@ -42,4 +49,3 @@ systemctl restart apache2
 rm /var/www/html/index.html
 cp index.php /var/www/html/index.php
 echo "DONE! - MySQL username: root"
-

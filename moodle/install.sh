@@ -1,14 +1,31 @@
 #!/bin/bash
+
+UNATTENDED=1
+
 if [[ $EUID -ne 0 ]]; then
 	echo "Please run as root"
 	exit 1
 fi
 
-read -sp "Password for MySQL root: " root_passw
+#
+root_passw="ciccione"
+if [[ UNATTENDED -ne 1 ]]; then
+	read -sp "Password for MySQL root: " root_passw
+fi
 
 echo "Please enter NEW moodle user credentials"
-read -p "Moodle admin username: " m_user
-read -sp "Moodle admin password: " m_passw
+m_user="mymoodle"
+if [[ UNATTENDED -ne 1 ]]; then
+	read -p "Moodle admin username: " m_user
+fi
+
+
+#r
+m_passw="ciccione"
+if [[ UNATTENDED -ne 1 ]]; then
+	read -sp "Moodle admin password: " m_passw
+fi
+
 
 if [[ -z $m_user || -z $m_passw ]]; then
 	echo "Credentials not set, please try again"

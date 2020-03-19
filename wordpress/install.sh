@@ -1,14 +1,27 @@
 #!/bin/bash
+
+UNATTENDED=1
+
 if [[ $EUID -ne 0 ]]; then
 	echo "Please run as root"
 	exit 1
 fi
 
-read -sp "Password for MySQL root: " root_passw
+root_passw="ciccione"
+if [[ UNATTENDED -ne 1 ]]; then
+  read -sp "Password for MySQL root: " root_passw
+fi
 
 echo "Please enter NEW wordpress user credentials"
-read -p "Wordpress admin username: " wp_user
-read -sp "Wordpress admin password: " wp_passw
+wp_user="ciccione"
+if [[ UNATTENDED -ne 1 ]]; then
+  read -p "Wordpress admin username: " wp_user
+fi
+
+wp_passw="ciccione"
+if [[ UNATTENDED -ne 1 ]]; then
+  read -sp "Wordpress admin password: " wp_passw
+fi
 
 if [[ -z $wp_user || -z $wp_passw ]]; then
 	echo "Credentials not set, please try again"
