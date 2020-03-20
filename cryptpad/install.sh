@@ -1,36 +1,34 @@
 #!/bin/sh
 set -e # Fallisci in caso di errore
 
-sudo -v
+apt update
+apt -y install git nodejs npm
+npm install -g bower
 
-sudo apt update
-sudo apt -y install git nodejs npm
-sudo npm install -g bower
+git clone https://github.com/xwiki-labs/cryptpad.git /var/cryptpad
 
-git clone https://github.com/xwiki-labs/cryptpad.git $HOME/.cryptpad
+cp config.js /var/cryptpad/config/config.js
 
-cp config.js $HOME/.cryptpad/config/config.js
-
-cd $HOME/.cryptpad
+cd /var/cryptpad
 
 npm install
-bower install
+bower install --allow-root
 
 #sudo ufw allow 3000
 #sudo ufw allow 3001
 
-sudo bash -c "cat > /etc/systemd/system/cryptpad.service" <<EOF
+cat > /etc/systemd/system/cryptpad.service <<EOF
 [Unit]
 Description = Cryptpad service
 
 [Service]
-ExecStart = /usr/bin/node $HOME/.cryptpad/server
+ExecStart = /usr/bin/node /var/cryptpad/server
 
 TimeoutStartSec = 0s
-WorkingDirectory=$HOME/.cryptpad
+WorkingDirectory=/var/cryptpad
 [Install]
 WantedBy = multi-user.target
 EOF
 
-sudo systemctl daemon-reload
-sudo systemctl enable --now cryptpad.service
+systemctl daemon-reload
+systemctl enable --now cryptpad.service
