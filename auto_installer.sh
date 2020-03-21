@@ -7,6 +7,8 @@ if [[ $EUID -ne 0 ]]; then
 	exit 1
 fi
 
+apt -y install git
+
 NEWUSER="opendidattica"
 
 #user: opendidattica, passw: opendidattica
@@ -17,6 +19,8 @@ useradd -m -p FFN98lJiCXnqs -s/bin/bash $NEWUSER
 usermod -aG sudo $NEWUSER
 echo "Utente scelto: $NEWUSER"
 
+su -c "git clone https://github.com/hbar-boi/assoprovider-scripts.git" opendidattica
+cd assoprovider-scripts
 su -c "sudo -S ./install_all.sh" opendidattica
 
 deluser $NEWUSER sudo
