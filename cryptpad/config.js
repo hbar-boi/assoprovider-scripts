@@ -46,7 +46,7 @@ module.exports = {
  *  cryptpad/docs/example.nginx.conf (see the $main_domain variable)
  *
  */
-    httpUnsafeOrigin: 'http://localhost:3000/',
+    httpUnsafeOrigin: 'http://opendidattica.org:3000/',
 
 /*  httpSafeOrigin is the URL that is used for the 'sandbox' described above.
  *  If you're testing or developing with CryptPad on your local machine then
@@ -72,7 +72,7 @@ module.exports = {
  *  all addresses, including IPv6, set this to '::'.
  *
  */
-    httpAddress: '0.0.0.0',
+    httpAddress: '::',
 
 /*  httpPort specifies on which port the nodejs server should listen.
  *  By default it will serve content over port 3000, which is suitable
@@ -134,7 +134,7 @@ module.exports = {
     /*  CryptPad will display a point of contact for your instance on its contact page
      *  (/contact.html) if you provide it below.
      */
-    adminEmail: 'i.did.not.read.my.config@cryptpad.fr',
+    adminEmail: 'cryptpad@opendidattica.org',
 
     /*
      *  By default, CryptPad contacts one of our servers once a day.
